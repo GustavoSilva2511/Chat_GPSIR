@@ -13,7 +13,12 @@ function ifCreate(text) {
 
 async function getAnswer(){
     let text = sendMessage();
-    let res = ifCreate(text);
+
+    if (!text.trim()) {
+        return false
+    }
+
+    let res = ifCreate(text);    
     let idMessage = receiveMessage("...");
 
     if (res[0]) {
