@@ -96,7 +96,7 @@ header h1 {
     font-size: 25px;
     opacity: 0.4;
     text-align: center;
-    margin-top: 40vh;
+    margin-top: 35vh;
 }
 
 
@@ -136,7 +136,7 @@ header h1 {
 }
 
 .user-content p {
-    font-size: 20px;
+    font-size: 15px;
     padding: 5px;
 }
 
@@ -167,8 +167,15 @@ header h1 {
 }
 
 .chat-content p {
-    font-size: 20px;
+    font-size: 15px;
     padding: 5px;
+}
+
+.img-created {
+    width: 100%;
+    margin-top: 10px;
+    border: solid 2px rgb(42, 42, 42);
+    border-radius: 10px;
 }
 
 .send-message {
