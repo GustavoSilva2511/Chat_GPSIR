@@ -1,0 +1,210 @@
+:root {
+    --darkElement: rgb(23, 23, 23);
+
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+        width: 15px;
+        height: 15px;
+    }
+
+    100% {
+        opacity: 0;
+    }
+    
+}
+
+.point1 {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    animation: appear 0.5s infinite;
+}
+
+.point2 {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    animation: appear 0.7s infinite;
+    animation-delay: 0.2s;
+}
+
+.point3 {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    animation: appear 0.9s infinite;
+    animation-delay: 0.1s;
+}
+
+.loading {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 50px;
+    min-height: 15px;
+    margin-top: 20px;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+}
+
+.screen {
+    background: radial-gradient(rgb(60, 60, 60),rgb(54, 54, 54), rgb(46, 46, 46), rgb(39, 39, 39));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    max-width: 500px;
+    min-width: 200px;
+    min-height: 100vh;   
+}
+
+header {
+    background-color: var(--darkElement);
+    color: white;
+    text-align: center;
+    position: fixed;
+    padding-block: 10px;
+
+    width: 100%;
+    max-width: 500px;
+    min-width: 200px;
+    box-shadow: 0px 2px 10px 4px rgba(0, 0, 0, 0.15);
+}
+
+header h1 {
+    font-size: 30px;
+}
+
+.empty {
+    display: flex;
+    align-self: center;
+    color: aliceblue;
+    font-size: 25px;
+    opacity: 0.4;
+    text-align: center;
+    margin-top: 40vh;
+}
+
+
+
+.chat {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    margin-block: 60px;
+}
+
+.user-message {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+
+    margin-inline: 10px;
+    margin-block: 5px;
+    align-self: flex-end;
+}
+
+.user-message p {
+    font-size: 25px;
+    color: rgb(232, 232, 232);
+}
+
+.user-message .user-content {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 5px;
+    width: 80%;
+    justify-self: flex-end;
+    text-align: end;
+}
+
+.user-content p {
+    font-size: 20px;
+    padding: 5px;
+}
+
+
+.chat-message {
+    width: 90%;
+    margin-inline: 10px;
+    margin-block: 5px;
+}
+
+.chat-message p {
+    font-size: 25px;
+    color: rgb(231, 231, 231);
+}
+
+
+.chat-message .chat-content {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 5px;
+    width: 90%;
+    min-height: 30px;
+
+    box-shadow: -3px 1px 10px 3px rgba(0, 0, 0, 0.09) ;
+}
+
+.chat-content p {
+    font-size: 20px;
+    padding: 5px;
+}
+
+.send-message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: fixed;
+    width: 100%;
+    max-width: 500px;
+    min-width: 320px;
+
+    bottom: 0;
+    padding-block: 10px;
+
+    background-color: rgba(0, 0, 0, 0.454);
+
+}
+
+.send-message > * {
+    margin-inline: 10px;
+}
+
+.send-message input{
+    text-align: start;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+
+    width: 70%;
+}
+
+.send-message button {
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(255, 255, 255);
+    width: 20%;
+    padding: 10px;
+}
