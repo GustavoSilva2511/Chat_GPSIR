@@ -1,8 +1,6 @@
 async function getAnswer(){
     let text = sendMessage()
     let idMessage = receiveMessage("...")
-    let encypt = sha256(idMessage)
-    console.log(encypt)
     const options = {   
         method: 'POST',
         headers: {
