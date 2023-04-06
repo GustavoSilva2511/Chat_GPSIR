@@ -32,6 +32,5 @@ function createMessage(user, content, send) {
 
     message.appendChild(messageContent)
 
-
     return [message, id];
 }

@@ -58,6 +58,9 @@ async function getAnswer(){
         });
 
     } else {
+        let infoSession = JSON.parse(sessionStorage.getItem("info-session"));
+        let messages = JSON.stringify(infoSession.messages)
+        console.log(`{"model":"gpt-3.5-turbo","messages":${messages}}`)
         const options = {   
             method: 'POST',
             headers: {
@@ -65,7 +68,7 @@ async function getAnswer(){
                 'X-RapidAPI-Key': '1dd352a2ccmshaf2288499304910p10232cjsn25c75ddc300b',
                 'X-RapidAPI-Host': 'openai80.p.rapidapi.com'
             },
-            body: `{"model":"gpt-3.5-turbo","messages":[{"role":"user","content":"${text}"}]}`
+            body: `{"model":"gpt-3.5-turbo","messages":${messages}}`
         };
         
         fetch('https://openai80.p.rapidapi.com/chat/completions', options)
@@ -79,6 +82,12 @@ async function getAnswer(){
             chatLoading.style = "display: none"
             document.getElementById("mode").innerHTML = response.choices[0].message.role
 
+            let infoSession = JSON.parse(sessionStorage.getItem("info-session"));
+            let Role = response.choices[0].message.role;
+            let Content = response.choices[0].message.content;
+            infoSession.messages.push({role: Role, content: Content});
+            let infoUpdated = JSON.stringify(infoSession);
+            sessionStorage.setItem("info-session", infoUpdated);
         })
         .catch(err => {
             receiveMessage("Sorry, I can't to respond you now, try later!")
