@@ -43,9 +43,9 @@ async function getAnswer(){
             chatLoading.style = "display: none"
 
             let img = CE("img", "img-created")
-            img.src = response.data[0].url;
+            img.src = response?.data[0].url;
             let img2 = CE("img", "img-created")
-            img2.src = response.data[1].url;
+            img2.src = response?.data[1].url;
 
             chatContent.appendChild(img)
             chatContent.appendChild(img2)
@@ -75,22 +75,24 @@ async function getAnswer(){
         .then(response => response.json())
         .then(response => {
             let textContent = document.querySelector(`#${idMessage} .text-content`);
-            textContent.innerHTML = response.choices[0].message.content;
+            textContent.innerHTML = response?.choices ? response?.choices[0].message.content : "Seguinte, a api deu o limite kkkkkkkkkkk";
             let chatContent = document.querySelector(`#${idMessage} .chat-content`);
             chatContent.style = "display: flex"
             let chatLoading = document.querySelector(`#${idMessage} .loading`);
             chatLoading.style = "display: none"
-            document.getElementById("mode").innerHTML = response.choices[0].message.role
+            document.getElementById("mode").innerHTML = response?.choices[0].message.role
 
-            let infoSession = JSON.parse(sessionStorage.getItem("info-session"));
-            let Role = response.choices[0].message.role;
-            let Content = response.choices[0].message.content;
-            infoSession.messages.push({role: Role, content: Content});
-            let infoUpdated = JSON.stringify(infoSession);
-            sessionStorage.setItem("info-session", infoUpdated);
+            if (response?.choices) {
+                let infoSession = JSON.parse(sessionStorage.getItem("info-session"));
+                let Role = response?.choices[0].message.role;
+                let Content = response?.choices[0].message.content;
+                infoSession.messages.push({role: Role, content: Content});
+                let infoUpdated = JSON.stringify(infoSession);
+                sessionStorage.setItem("info-session", infoUpdated);
+            }
+
         })
         .catch(err => {
-            receiveMessage("Sorry, I can't to respond you now, try later!")
             console.log(err)
         });
     }
