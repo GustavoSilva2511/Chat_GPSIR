@@ -32,13 +32,22 @@
         </main>
 
         <div class="send-message">
-            <textarea id="message-content" class="message-content" placeholder="send a message..." name="" id="" cols="30" rows="2"></textarea>
+            <textarea id="message-content" class="message-content" placeholder="send a message..." cols="30" rows="2"
+            ></textarea>
 
             <button id="btn-send" onclick="getAnswer()">
                 <img src="./Assets/icon-send.svg" alt="">
             </button>
         </div>
     </div>
-     
+    <script>
+        let input = document.getElementById("message-content");
+        input.addEventListener("keypress", function(event) {
+            if (event.key === "Enter" && !event.shiftKey) {
+                document.getElementById("btn-send").click();
+                input.focus()
+            }
+        })
+    </script>
 </body>
 </html>

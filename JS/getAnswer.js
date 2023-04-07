@@ -12,7 +12,6 @@ function ifCreate(text) {
 }
 
 async function getAnswer(){
-
     let text = sendMessage();
 
     if (!text.trim()) {
@@ -21,6 +20,7 @@ async function getAnswer(){
 
     let res = ifCreate(text);    
     let idMessage = receiveMessage("...");
+    document.location.href = `#${idMessage}`
 
     if (res[0]) {
         // fetch("./JS/config.json")
