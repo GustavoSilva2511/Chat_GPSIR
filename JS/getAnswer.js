@@ -12,6 +12,7 @@ function ifCreate(text) {
 }
 
 async function getAnswer(){
+
     let text = sendMessage();
 
     if (!text.trim()) {
@@ -22,82 +23,89 @@ async function getAnswer(){
     let idMessage = receiveMessage("...");
 
     if (res[0]) {
-        const options = {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-                'X-RapidAPI-Key': '1dd352a2ccmshaf2288499304910p10232cjsn25c75ddc300b',
-                'X-RapidAPI-Host': 'openai80.p.rapidapi.com'
-            },
-            body: `{"prompt":"${res[1]}","n":2,"size":"1024x1024"}`
-        };
-        
-        fetch('https://openai80.p.rapidapi.com/images/generations', options)
-        .then(response => response.json())
-        .then(response => {
-            let textContent = document.querySelector(`#${idMessage} .text-content`);
-            textContent.innerHTML = "Aqui estão duas imagens que consegui criar!";
-            let chatContent = document.querySelector(`#${idMessage} .chat-content`);
-            chatContent.style = "display: flex"
-            let chatLoading = document.querySelector(`#${idMessage} .loading`);
-            chatLoading.style = "display: none"
+        // fetch("./JS/config.json")
+        // .then(res => res.json())
+        // .then(data => {
+        //     const options = {
+        //         method: 'POST',
+        //         headers: {
+        //             'content-type': 'application/json',
+        //             'X-RapidAPI-Key': data.token,
+        //             'X-RapidAPI-Host': 'openai80.p.rapidapi.com'
+        //         },
+        //         body: `{"prompt":"${res[1]}","n":2,"size":"1024x1024"}`
+        //     };
 
-            let img = CE("img", "img-created")
-            img.src = response?.data[0].url;
-            let img2 = CE("img", "img-created")
-            img2.src = response?.data[1].url;
-
-            chatContent.appendChild(img)
-            chatContent.appendChild(img2)
-
-
-        })
-        .catch(err =>   {
-            receiveMessage("Sorry, I can't to respond you now, try later!")
-            console.log(err)
-        });
-
-    } else {
-        let infoSession = JSON.parse(sessionStorage.getItem("info-session"));
-        let messages = JSON.stringify(infoSession.messages)
-        console.log(`{"model":"gpt-3.5-turbo","messages":${messages}}`)
-        const options = {   
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-                'X-RapidAPI-Key': '1dd352a2ccmshaf2288499304910p10232cjsn25c75ddc300b',
-                'X-RapidAPI-Host': 'openai80.p.rapidapi.com'
-            },
-            body: `{"model":"gpt-3.5-turbo","messages":${messages}}`
-        };
-        
-        fetch('https://openai80.p.rapidapi.com/chat/completions', options)
-        .then(response => response.json())
-        .then(response => {
-            let textContent = document.querySelector(`#${idMessage} .text-content`);
-            textContent.innerHTML = response?.choices ? response?.choices[0].message.content : "Seguinte, a api deu o limite kkkkkkkkkkk";
-            let chatContent = document.querySelector(`#${idMessage} .chat-content`);
-            chatContent.style = "display: flex"
-            let chatLoading = document.querySelector(`#${idMessage} .loading`);
-            chatLoading.style = "display: none"
-            document.getElementById("mode").innerHTML = response?.choices[0].message.role
-
-            if (response?.choices) {
-                let infoSession = JSON.parse(sessionStorage.getItem("info-session"));
-                let Role = response?.choices[0].message.role;
-                let Content = response?.choices[0].message.content;
-                infoSession.messages.push({role: Role, content: Content});
-                let infoUpdated = JSON.stringify(infoSession);
-                sessionStorage.setItem("info-session", infoUpdated);
-            }
-
-        })
-        .catch(err => {
-            console.log(err)
-        });
-    }
-
-
+        //     fetch('https://openai80.p.rapidapi.com/images/generations', options)
+        //     .then(response => response.json())
+        //     .then(response => {
+        //         let textContent = document.querySelector(`#${idMessage} .text-content`);
+        //         textContent.innerHTML = "Aqui estão duas imagens que consegui criar!";
+        //         let chatContent = document.querySelector(`#${idMessage} .chat-content`);
+        //         chatContent.style = "display: flex"
+        //         let chatLoading = document.querySelector(`#${idMessage} .loading`);
+        //         chatLoading.style = "display: none"
     
+        //         let img = CE("img", "img-created")
+        //         img.src = response?.data[0].url;
+        //         let img2 = CE("img", "img-created")
+        //         img2.src = response?.data[1].url;
+    
+        //         chatContent.appendChild(img)
+        //         chatContent.appendChild(img2)
+    
+    
+        //     })
+        //     .catch(err =>   {
+        //         receiveMessage("Sorry, I can't to respond you now, try later!")
+        //         console.log(err)
+        //     });
 
+        // })
+        
+    } else {
+        fetch("./JS/config.json")
+        .then(res => res.json())
+        .then(data => {
+            let infoSession = JSON.parse(sessionStorage.getItem("info-session"));
+            let messages = JSON.stringify(infoSession.messages)
+            const options = {   
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'X-RapidAPI-Key': data.token,
+                    'X-RapidAPI-Host': 'openai80.p.rapidapi.com'
+                },
+                body: `{"model":"gpt-3.5-turbo","messages":${messages}}`
+            };
+            
+            fetch('https://openai80.p.rapidapi.com/chat/completions', options)
+            .then(response => response.json())
+            .then(response => {
+                let textContent = document.querySelector(`#${idMessage} .text-content`);
+                textContent.innerHTML = response?.choices ? response?.choices[0].message.content : "Seguinte, a api deu o limite kkkkkkkkkkk";
+                let chatContent = document.querySelector(`#${idMessage} .chat-content`);
+                chatContent.style = "display: flex"
+                let chatLoading = document.querySelector(`#${idMessage} .loading`);
+                chatLoading.style = "display: none"
+                let nameChat = document.querySelector(`#${idMessage} .user-name`);
+                response?.choices ? "" : nameChat.innerHTML = "Admin";
+                document.getElementById("mode").innerHTML = response?.choices[0].message.role;
+    
+                if (response?.choices) {
+                    let infoSession = JSON.parse(sessionStorage.getItem("info-session"));
+                    let Role = response?.choices[0].message.role;
+                    let Content = response?.choices[0].message.content;
+                    infoSession.messages.push({role: Role, content: Content});
+                    let infoUpdated = JSON.stringify(infoSession);
+                    sessionStorage.setItem("info-session", infoUpdated);
+                }
+    
+            })
+            .catch(err => {
+                console.log(err)
+            })
+            
+        });    
+    }
 }

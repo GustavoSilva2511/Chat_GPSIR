@@ -3,16 +3,13 @@ function existChat() {
     let exist = sessionStorage.getItem("info-session");
     if (exist) {
         // let infos = JSON.parse(exist);
-        // infos.messages.forEach(message => {
-        //     if (message.role == "user") {
-
-                
-        //         let chat = document.getElementById("chat");   
-        //         let message = createMessage(infos.userTag, message.content, true);
+        // infos?.messages?.forEach(message => {
+        //     if (message.role == "user") {       
+        //         let Chat = document.getElementById("chat")
+        //         let Message = createMessage(infos.usertag, message.content, true);
+        //         Chat.appendChild(Message[0])
         //         document.getElementById("empty").style = "display: none";
-     
-        //         chat.appendChild(message[0]);
-                          
+
         //     } else {
         //         let res = receiveMessage("...");
 
