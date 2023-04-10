@@ -7,7 +7,7 @@ function CE(elem, identify, type, content) {
     }
 
     if (content) {
-        element.innerHTML = content;
+        element.textContent = content;
     }
 
     return element

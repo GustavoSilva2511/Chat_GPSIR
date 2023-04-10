@@ -9,7 +9,7 @@ function sendMessage() {
         sessionStorage.setItem("info-session", infoUpdated);
 
         let chat = document.getElementById("chat");
-        let message = createMessage(infoSession.usertag, text, true);
+        let message = createMessage(localStorage.getItem("usertag"), text, true);
         chat.appendChild(message[0]);
         document.getElementById("empty").style = "display: none";
     }

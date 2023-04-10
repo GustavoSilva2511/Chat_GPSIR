@@ -1,7 +1,16 @@
 
 function existChat() {
     let exist = sessionStorage.getItem("info-session");
-    if (exist) {
+    let userTag = localStorage.getItem("usertag");
+
+    if (!exist) {
+        info = {
+            messages: [],
+            username: "user",
+        }
+        let infoString = JSON.stringify(info);
+        sessionStorage.setItem("info-session", infoString);
+    } else {
         // let infos = JSON.parse(exist);
         // infos?.messages?.forEach(message => {
         //     if (message.role == "user") {       
@@ -9,7 +18,7 @@ function existChat() {
         //         let Message = createMessage(infos.usertag, message.content, true);
         //         Chat.appendChild(Message[0])
         //         document.getElementById("empty").style = "display: none";
-
+                
         //     } else {
         //         let res = receiveMessage("...");
 
@@ -21,17 +30,12 @@ function existChat() {
         //         chatLoading.style = "display: none";
         //         document.getElementById("mode").innerHTML = message.role;
         //     }
-        // });
+        // })
+    }
 
-    } else {
-        let userTag = window.prompt("Me fale seu nome!");
-        info = {
-            messages: [],
-            username: "user",
-            usertag: userTag
-        }
-        let infoString = JSON.stringify(info);
-        sessionStorage.setItem("info-session", infoString);
+    if (!userTag) {
+        let usertag = window.prompt("Nome de usuário: ")
+        localStorage.setItem("usertag", usertag)
     }
 }
 
